@@ -1,9 +1,8 @@
-package com.example.sample.DTO;
+package com.example.sample.DTO.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.aspectj.lang.annotation.AfterThrowing;
 
 import java.math.BigDecimal;
 

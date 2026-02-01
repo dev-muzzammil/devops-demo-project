@@ -1,7 +1,7 @@
 package com.example.sample.ServiceImpl;
 
-import com.example.sample.DTO.CartRequestDTO;
-import com.example.sample.DTO.CartResponseDTO;
+import com.example.sample.DTO.Request.CartRequestDTO;
+import com.example.sample.DTO.Response.CartResponseDTO;
 import com.example.sample.Entity.Cart;
 import com.example.sample.Repo.CartRepo;
 import com.example.sample.Service.CartService;
