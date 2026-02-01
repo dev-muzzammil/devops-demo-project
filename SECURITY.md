@@ -103,15 +103,7 @@ Set up alerts for:
 3. **Change default credentials** before any deployment
 4. **Enable security scanning** in CI/CD pipeline
 
-## 📞 Security Incidents
-
-If you discover a security issue:
-1. Do NOT commit the fix to a public branch
-2. Create a private/security branch
-3. Fix the issue
-4. Rotate all exposed credentials
-5. Consider responsible disclosure
 
 ---
 
-**Remember**: This is a learning project. Always follow your organization's security policies in production environments!
+**Remember**: This is a learning project!.
