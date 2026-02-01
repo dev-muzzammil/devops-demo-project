@@ -1,6 +1,6 @@
 # DevOps Demo Project
 
-A comprehensive Spring Boot application demonstrating, liquibase, Swagger/OpenAPI, Validation, AOP, DevOps best practices including Docker, Kubernetes, CI/CD, monitoring with Prometheus and Grafana, and code quality with Google Checkstyle.
+A comprehensive Spring Boot application demonstrating, liquibase, Swagger/OpenAPI, Validation, AOP, Spring Security DevOps best practices including Docker, Kubernetes, CI/CD, monitoring with Prometheus and Grafana, and code quality with Google Checkstyle.
 
 ## 🚀 Features
 

@@ -1,7 +1,7 @@
 package com.example.sample.ServiceImpl;
 
-import com.example.sample.DTO.CustomerRequestDTO;
-import com.example.sample.DTO.CustomerResponseDTO;
+import com.example.sample.DTO.Request.CustomerRequestDTO;
+import com.example.sample.DTO.Response.CustomerResponseDTO;
 import com.example.sample.Entity.Customer;
 import com.example.sample.Mapper.CustomerMapper;
 import com.example.sample.Repo.CustomerRepo;

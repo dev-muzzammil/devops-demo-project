@@ -26,7 +26,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDTO registerUser(UserRequestDTO requestDTO) {
-
         if (userRepo.existsByEmail(requestDTO.getEmail())) {
             throw new IllegalArgumentException("Email already registered");
         }
@@ -42,7 +41,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDTO getById(Long id) {
         User user = userRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with Id" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with Id: " + id));
         return userMapper.toDto(user);
     }
 
@@ -55,7 +54,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDTO update(Long id, UserRequestDTO requestDTO) {
         User user = userRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with Id" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with Id: " + id));
+
+        // Check for duplicate email/contact number during update
+        if (userRepo.existsByEmailAndIdNot(requestDTO.getEmail(), id)) {
+            throw new IllegalArgumentException("Email already registered");
+        }
+        if (userRepo.existsByContactNoAndIdNot(requestDTO.getContactNo(), id)) {
+            throw new IllegalArgumentException("Contact number already registered");
+        }
 
         userMapper.updateFromRequest(requestDTO, user);
         return userMapper.toDto(userRepo.save(user));
@@ -64,7 +71,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Admin
     public void delete(Long id) {
-        if (!userRepo.existsById(id)) throw new ResourceNotFoundException("User not found with Id" + id);
+        if (!userRepo.existsById(id)) {
+            throw new ResourceNotFoundException("User not found with Id: " + id);
+        }
         userRepo.deleteById(id);
     }
 

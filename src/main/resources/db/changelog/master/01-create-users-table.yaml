@@ -1,0 +1,124 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-users-table
+      author: devops-demo
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: age
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contactNo
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: enabled
+                  type: boolean
+                  defaultValueBoolean: true
+              - column:
+                  name: accountNonExpired
+                  type: boolean
+                  defaultValueBoolean: true
+              - column:
+                  name: accountNonLocked
+                  type: boolean
+                  defaultValueBoolean: true
+              - column:
+                  name: credentialsNonExpired
+                  type: boolean
+                  defaultValueBoolean: true
+
+  - changeSet:
+      id: create-user-roles-table
+      author: devops-demo
+      changes:
+        - createTable:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_roles_user
+                    references: users(id)
+                    onDelete: cascade
+              - column:
+                  name: role
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: user_roles
+            columnNames: user_id, role
+            constraintName: pk_user_roles
+
+  - changeSet:
+      id: insert-default-admin-user
+      author: devops-demo
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: "Admin User"
+              - column:
+                  name: age
+                  value: "30"
+              - column:
+                  name: email
+                  value: "admin@example.com"
+              - column:
+                  name: password
+                  value: "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi." # password: password
+              - column:
+                  name: contactNo
+                  value: "1234567890"
+        - insert:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  valueComputed: "SELECT id FROM users WHERE email = 'admin@example.com'"
+              - column:
+                  name: role
+                  value: "ADMIN"
+        - insert:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  valueComputed: "SELECT id FROM users WHERE email = 'admin@example.com'"
+              - column:
+                  name: role
+                  value: "USER"

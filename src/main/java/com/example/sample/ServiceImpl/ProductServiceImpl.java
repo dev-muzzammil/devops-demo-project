@@ -1,7 +1,7 @@
 package com.example.sample.ServiceImpl;
 
-import com.example.sample.DTO.ProductRequestDTO;
-import com.example.sample.DTO.ProductResponseDTO;
+import com.example.sample.DTO.Request.ProductRequestDTO;
+import com.example.sample.DTO.Response.ProductResponseDTO;
 import com.example.sample.Entity.Product;
 import com.example.sample.Repo.ProductRepo;
 import com.example.sample.Service.ProductService;
