@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.5.5'
     id "org.liquibase.gradle" version "2.1.1"
     id 'io.spring.dependency-management' version '1.1.7'
+    id 'checkstyle'
 }
 
 group = 'com.example'
@@ -34,7 +35,9 @@ dependencies {
     implementation 'org.liquibase:liquibase-core'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
-    implementation 'me.paulschwarz:spring-dotenv:3.0.0'
+    
+    // Micrometer for Prometheus metrics
+    implementation 'io.micrometer:micrometer-registry-prometheus'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -56,4 +59,19 @@ liquibase {
         main {}
     }
     runList = 'main'
+}
+
+checkstyle {
+    toolVersion = '10.12.4'
+    configFile = file("${rootDir}/google-checkstyle.xml")
+    maxWarnings = 0
+    maxErrors = 0
+}
+
+checkstyleMain {
+    source = sourceSets.main.allJava
+}
+
+checkstyleTest {
+    source = sourceSets.test.allJava
 }
