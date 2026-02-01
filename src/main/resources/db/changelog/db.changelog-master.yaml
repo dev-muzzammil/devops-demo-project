@@ -1,5 +1,11 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/orders-table.yaml
+      file: db/changelog/users-table.json
   - include:
-      file: db/changelog/users-table.yaml
+      file: db/changelog/orders-table.json
+  - include:
+      file: db/changelog/product-table.json
+  - include:
+      file: db/changelog/customer-table.json
+  - include:
+      file: db/changelog/cart-table.json

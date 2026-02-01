@@ -6,7 +6,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
-    default-schema: public
+    default-schema: ${DB_SCHEMA:public}
     contexts: development
 
   jpa:

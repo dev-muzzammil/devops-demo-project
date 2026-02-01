@@ -56,13 +56,7 @@ tasks.named('test') {
 
 liquibase {
     activities {
-        main {
-            changeLogFile 'src/main/resources/db/changelog/db.changelog-master.yaml'
-            url 'jdbc:postgresql://localhost:5432/sample'
-            username 'postgres'
-            password '1234'
-            driver 'org.postgresql.Driver'
-        }
+        main {}
     }
     runList = 'main'
 }
