@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: monitoring
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+      evaluation_interval: 15s
+
+    scrape_configs:
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['localhost:9090']
+
+      - job_name: 'demo-app'
+        metrics_path: '/actuator/prometheus'
+        kubernetes_sd_configs:
+          - role: endpoints
+            namespaces:
+              names:
+                - demo-app
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_service_name]
+            action: keep
+            regex: demo-app-service
+          - source_labels: [__meta_kubernetes_endpoint_port_name]
+            action: keep
+            regex: http
+          - target_label: __address__
+            replacement: demo-app-service.demo-app.svc.cluster.local:80
+          - source_labels: [__address__]
+            target_label: __param_target
+          - target_label: __metrics_path__
+            replacement: /actuator/prometheus

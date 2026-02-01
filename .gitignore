@@ -35,3 +35,19 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Security - NEVER commit secrets
+k8s/secrets.yaml
+*.key
+*.pem
+*.crt
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Additional security
+*.log
+.DS_Store
+Thumbs.db
